@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://3Dmol.csb.pitt.edu/build/3Dmol-min.js"></script>
+  
+<meta charset="utf-8">
+<title>cisc499</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+
+.header {
+  background-color: #f1f1f1;
+  padding: 20px;
+  text-align: center;
+}
+
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+ 
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+ 
+
+</style>
+
+<body>
+
+<div class="header">
+  <h1>499 project</h1>
+</div>
+
+<div class="topnav">
+  <a href="#">home</a>
+  <a href="#">more</a>
+  
+</div>
+
+
+ 
+<h1 style="font-family:green">A platform for the analysis of DNA-transcription factor binding sites</h1>
+
+<hr>
+
+ 
+<p style="background-color:lightgrey;">
+This web server is for analyzing the binding sites between double-stranded DNA and transcription factors. 
+A pipeline based on the command line (Li nux) has been proposed by Computational Biology and Biophysics Lab at Queen's University. 
+The goal is to optimize the pipeline and run it as a graphical user interface. The web allows users to search and analyze the DNA-transcription factor binding sites from a user-provided PDB ID (the structure identifier used in the Protein Data Bank) or a PDB-formatted file. 
+The results can be directly visualized or downloaded. This web server will help researchers to understand the molecular details of how the transcription factors recognize DNA and provide important clues for therapeutic targeting of oncogenic transcription factors. </p1>
+
+<style>
+    p {text-align:center;}
+    p {text-align:right;}
+    p {text-align:justify;}
+    p.solid {border-bottom-style:solid;}
+</style>
+
+<form action="">
+    please type your sequence here: <input type="text" ><br>
+    
+    </form>
+  </body>
+
+
+  <body>
+
+  
+      <div id="container-01" class="mol-container"></div>
+      <style>
+          .mol-container {
+            width: 60%;
+            height: 400px;
+            position: relative;
+          }
+          </style>
+          <script>
+              $(function() {
+                let element = $('#container-01');
+                let config = { backgroundColor: 'orange' };
+                let viewer = $3Dmol.createViewer( element, config );
+                viewer.addSphere({ center: {x:0, y:0, z:0}, radius: 10.0, color: 'green' });
+                viewer.zoomTo();
+                viewer.render();
+                viewer.zoom(0.8, 2000);
+                viewer.setBackgroundColor('white');
+              });
+                
+              let viewer = $3Dmol.createViewer( element, config );
+              let pdbUri = '/path/to/your/pdb/files/1ycr.pdb';
+              jQuery.ajax( pdbUri, { 
+                  success: function(data) {
+                  let v = viewer;
+                  v.addModel( data, "mol2" );                       /* load data */
+                  v.setStyle({}, {cartoon: {color: 'spectrum'}});  /* style all atoms */
+                  v.zoomTo();                                      /* set camera */
+                  v.render();                                      /* render scene */
+                  v.zoom(1.2, 1000);                               /* slight zoom */
+                  },
+              error: function(hdr, status, err) {
+                  console.error( "Failed to load PDB " + pdbUri + ": " + err );
+                  },
+              }); 
+          </script>
+</body>
+</html>
